@@ -746,19 +746,19 @@ with tab3:
                 unsafe_allow_html=True)
     display_cols = ['City', 'BHK', 'Rent', 'Size', 'Furnishing Status', 'Area Type',
                     'Tenant Preferred', 'Bathroom']
-    st.dataframe(
-        df[display_cols].head(20).style
-            .background_gradient(subset=['Rent'], cmap='YlGn')
-            .format({'Rent': '₹{:,.0f}', 'Size': '{:,} sqft'}),
-        use_container_width=True, height=340
-    )
+    display_df = df[display_cols].head(20).copy()
+    display_df['Rent'] = display_df['Rent'].apply(lambda x: f"₹{int(x):,}")
+    display_df['Size'] = display_df['Size'].apply(lambda x: f"{int(x):,} sqft")
+    st.dataframe(display_df, use_container_width=True, height=340)
 
     # City summary table
     st.markdown('<div class="section-label" style="margin-top:16px;">City Statistics</div>',
                 unsafe_allow_html=True)
     city_table = city_stats.copy()
     city_table.columns = ['Mean Rent', 'Median Rent', 'Min Rent', 'Max Rent', 'Listings']
-    city_table = city_table.applymap(lambda x: f"₹{int(x):,}" if x > 100 else int(x))
+    for col in ['Mean Rent', 'Median Rent', 'Min Rent', 'Max Rent']:
+        city_table[col] = city_table[col].apply(lambda x: f"₹{int(x):,}")
+    city_table['Listings'] = city_table['Listings'].apply(lambda x: int(x))
     st.dataframe(city_table, use_container_width=True)
 
 
