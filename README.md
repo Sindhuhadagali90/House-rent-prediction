@@ -48,9 +48,9 @@ The system is trained on **4,746 real listings** from 2022 using a **Gradient Bo
 
 ## 🌐 Live Demo
 
-🚀 **[Launch RentIQ on Streamlit Cloud →](#)**
+🚀 **[Launch RentIQ on Streamlit Cloud →](https://house-rent-prediction-bjahcuvzj7zreirc7kuasw.streamlit.app/)**
 
-> *(Replace `#` with your deployed app URL after deployment)*
+
 
 ---
 
